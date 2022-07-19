@@ -1,20 +1,25 @@
-import * as fc from 'fast-check'
-import { isDeepStrictEqual } from 'util'
-import * as _ from '../src/Array'
-import * as B from '../src/boolean'
-import * as E from '../src/Either'
-import * as Eq from '../src/Eq'
-import { identity, pipe, tuple } from '../src/function'
-import * as M from '../src/Monoid'
-import * as N from '../src/number'
-import * as O from '../src/Option'
-import * as Ord from '../src/Ord'
-import { Predicate } from '../src/Predicate'
-import { Refinement } from '../src/Refinement'
-import { separated } from '../src/Separated'
-import * as S from '../src/string'
-import * as T from '../src/Task'
-import * as U from './util'
+import * as fc from 'https://cdn.skypack.dev/fast-check';
+import * as _ from '../deno_dist/Array.ts'
+import * as B from '../deno_dist/boolean.ts'
+import * as E from '../deno_dist/Either.ts'
+import * as Eq from '../deno_dist/Eq.ts'
+import { identity, pipe, tuple } from '../deno_dist/function.ts'
+import * as M from '../deno_dist/Monoid.ts'
+import * as N from '../deno_dist/number.ts'
+import * as O from '../deno_dist/Option.ts'
+import * as Ord from '../deno_dist/Ord.ts'
+import { Predicate } from '../deno_dist/Predicate.ts'
+import { Refinement } from '../deno_dist/Refinement.ts'
+import { separated } from '../deno_dist/Separated.ts'
+import * as S from '../deno_dist/string.ts'
+import * as T from '../deno_dist/Task.ts'
+import * as U from './util.ts'
+import {
+  describe,
+  it,
+} from "https://deno.land/std@0.148.0/testing/bdd.ts"
+
+const isDeepStrictEqual = U.deepStrictEqual
 
 /* tslint:disable:readonly-array */
 
@@ -962,10 +967,10 @@ describe('Array', () => {
       U.deepStrictEqual(_.chunksOf(2)(xs).concat(_.chunksOf(2)(ys)), _.chunksOf(2)(xs.concat(ys)))
       fc.assert(
         fc.property(
-          fc.array(fc.integer()).filter((xs) => xs.length % 2 === 0), // Ensures `xs.length` is even
+            fc.array(fc.integer()).filter((xs: any) => xs.length % 2 === 0), // Ensures `xs.length` is even
           fc.array(fc.integer()),
-          fc.integer(1, 1).map((x) => x * 2), // Generates `n` to be even so that it evenly divides `xs`
-          (xs, ys, n) => {
+            fc.integer({min: 1, max: 1}).map((x: any) => x * 2), // Generates `n` to be even so that it evenly divides `xs`
+            (xs: any, ys: any, n: any) => {
             const as = _.chunksOf(n)(xs).concat(_.chunksOf(n)(ys))
             const bs = _.chunksOf(n)(xs.concat(ys))
             isDeepStrictEqual(as, bs)
