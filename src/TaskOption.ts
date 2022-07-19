@@ -45,6 +45,9 @@ import { Zero1, guard as guard_ } from './Zero'
 import Task = T.Task
 import Option = O.Option
 
+// @ts-ignore Ignore unused HKT module import for Deno to work 
+import * as HKT from "./HKT"
+
 // -------------------------------------------------------------------------------------
 // model
 // -------------------------------------------------------------------------------------

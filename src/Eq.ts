@@ -14,6 +14,8 @@ import { pipe } from './function'
 import { Monoid } from './Monoid'
 import { ReadonlyRecord } from './ReadonlyRecord'
 import { Semigroup } from './Semigroup'
+// @ts-ignore Ignore unused HKT module import for Deno to work 
+import * as HKT from "./HKT"
 
 // -------------------------------------------------------------------------------------
 // model
@@ -24,7 +26,7 @@ import { Semigroup } from './Semigroup'
  * @since 2.0.0
  */
 export interface Eq<A> {
-  readonly equals: (x: A, y: A) => boolean
+    readonly equals: (x: A, y: A) => boolean
 }
 
 // -------------------------------------------------------------------------------------
@@ -36,7 +38,7 @@ export interface Eq<A> {
  * @since 2.0.0
  */
 export const fromEquals = <A>(equals: Eq<A>['equals']): Eq<A> => ({
-  equals: (x, y) => x === y || equals(x, y)
+    equals: (x, y) => x === y || equals(x, y)
 })
 
 // -------------------------------------------------------------------------------------
@@ -48,14 +50,14 @@ export const fromEquals = <A>(equals: Eq<A>['equals']): Eq<A> => ({
  * @since 2.10.0
  */
 export const struct = <A>(eqs: { [K in keyof A]: Eq<A[K]> }): Eq<{ readonly [K in keyof A]: A[K] }> =>
-  fromEquals((first, second) => {
-    for (const key in eqs) {
-      if (!eqs[key].equals(first[key], second[key])) {
-        return false
-      }
-    }
-    return true
-  })
+    fromEquals((first, second) => {
+        for (const key in eqs) {
+            if (!eqs[key].equals(first[key], second[key])) {
+                return false
+            }
+        }
+        return true
+    })
 
 /**
  * Given a tuple of `Eq`s returns a `Eq` for the tuple
@@ -76,7 +78,7 @@ export const struct = <A>(eqs: { [K in keyof A]: Eq<A[K]> }): Eq<{ readonly [K i
  * @since 2.10.0
  */
 export const tuple = <A extends ReadonlyArray<unknown>>(...eqs: { [K in keyof A]: Eq<A[K]> }): Eq<Readonly<A>> =>
-  fromEquals((first, second) => eqs.every((E, i) => E.equals(first[i], second[i])))
+    fromEquals((first, second) => eqs.every((E, i) => E.equals(first[i], second[i])))
 
 // -------------------------------------------------------------------------------------
 // non-pipeables
@@ -94,7 +96,7 @@ const contramap_: <A, B>(fa: Eq<A>, f: (b: B) => A) => Eq<B> = (fa, f) => pipe(f
  * @since 2.0.0
  */
 export const contramap: <A, B>(f: (b: B) => A) => (fa: Eq<A>) => Eq<B> = (f) => (fa) =>
-  fromEquals((x, y) => fa.equals(f(x), f(y)))
+    fromEquals((x, y) => fa.equals(f(x), f(y)))
 
 // -------------------------------------------------------------------------------------
 // instances
@@ -113,9 +115,9 @@ export const URI = 'Eq'
 export type URI = typeof URI
 
 declare module './HKT' {
-  interface URItoKind<A> {
-    readonly [URI]: Eq<A>
-  }
+    interface URItoKind<A> {
+        readonly [URI]: Eq<A>
+    }
 }
 
 /**
@@ -123,11 +125,11 @@ declare module './HKT' {
  * @since 2.5.0
  */
 export const eqStrict: Eq<unknown> = {
-  equals: (a, b) => a === b
+    equals: (a, b) => a === b
 }
 
 const empty: Eq<unknown> = {
-  equals: () => true
+    equals: () => true
 }
 
 /**
@@ -135,7 +137,7 @@ const empty: Eq<unknown> = {
  * @since 2.10.0
  */
 export const getSemigroup = <A>(): Semigroup<Eq<A>> => ({
-  concat: (x, y) => fromEquals((a, b) => x.equals(a, b) && y.equals(a, b))
+    concat: (x, y) => fromEquals((a, b) => x.equals(a, b) && y.equals(a, b))
 })
 
 /**
@@ -143,8 +145,8 @@ export const getSemigroup = <A>(): Semigroup<Eq<A>> => ({
  * @since 2.6.0
  */
 export const getMonoid = <A>(): Monoid<Eq<A>> => ({
-  concat: getSemigroup<A>().concat,
-  empty
+    concat: getSemigroup<A>().concat,
+    empty
 })
 
 /**
@@ -152,8 +154,8 @@ export const getMonoid = <A>(): Monoid<Eq<A>> => ({
  * @since 2.7.0
  */
 export const Contravariant: Contravariant1<URI> = {
-  URI,
-  contramap: contramap_
+    URI,
+    contramap: contramap_
 }
 
 // -------------------------------------------------------------------------------------
@@ -168,7 +170,7 @@ export const Contravariant: Contravariant1<URI> = {
  * @deprecated
  */
 export const getTupleEq: <T extends ReadonlyArray<Eq<any>>>(
-  ...eqs: T
+    ...eqs: T
 ) => Eq<{ [K in keyof T]: T[K] extends Eq<infer A> ? A : never }> = tuple
 
 /**
@@ -232,5 +234,5 @@ export const eqNumber: Eq<number> = eqStrict
  * @deprecated
  */
 export const eqDate: Eq<Date> = {
-  equals: (first, second) => first.valueOf() === second.valueOf()
+    equals: (first, second) => first.valueOf() === second.valueOf()
 }

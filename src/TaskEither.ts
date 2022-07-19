@@ -74,7 +74,8 @@ import { TaskOption, URI as TOURI } from './TaskOption'
 
 import Either = E.Either
 import Task = T.Task
-
+// @ts-ignore Ignore unused HKT module import for Deno to work 
+import * as HKT from "./HKT"
 /**
  * @category model
  * @since 2.0.0
@@ -273,7 +274,7 @@ export const getOrElseW: <E, B>(
  * @since 2.0.0
  */
 export const tryCatch = <E, A>(f: Lazy<Promise<A>>, onRejected: (reason: unknown) => E): TaskEither<E, A> => () =>
-  f().then(_.right, (reason) => _.left(onRejected(reason)))
+    f().then(_.right, (reason: any) => _.left(onRejected(reason)))
 
 /**
  * Converts a function returning a `Promise` to one returning a `TaskEither`.
@@ -420,7 +421,7 @@ const _apPar: Apply2<URI>['ap'] = (fab, fa) => pipe(fab, ap(fa))
 const _apSeq: Apply2<URI>['ap'] = (fab, fa) =>
   pipe(
     fab,
-    chain((f) => pipe(fa, map(f)))
+      chain((f) => pipe(fa, map(f)))
   )
 /* istanbul ignore next */
 const _chain: Chain2<URI>['chain'] = (ma, f) => pipe(ma, chain(f))

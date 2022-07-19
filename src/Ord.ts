@@ -15,6 +15,8 @@ import { constant, constTrue, pipe } from './function'
 import { Monoid } from './Monoid'
 import { Ordering } from './Ordering'
 import { Semigroup } from './Semigroup'
+// @ts-ignore Ignore unused HKT module import for Deno to work 
+import * as HKT from "./HKT"
 
 // -------------------------------------------------------------------------------------
 // model

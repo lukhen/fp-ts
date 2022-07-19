@@ -14,6 +14,8 @@
 import { pipe } from './function'
 import { flap as flap_, Functor2 } from './Functor'
 import { Bifunctor2 } from './Bifunctor'
+// @ts-ignore Ignore unused HKT module import for Deno to work 
+import * as HKT from "./HKT"
 
 // -------------------------------------------------------------------------------------
 // model
