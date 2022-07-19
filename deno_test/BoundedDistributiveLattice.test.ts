@@ -1,6 +1,11 @@
-import * as U from './util'
-import { getMinMaxBoundedDistributiveLattice } from '../src/BoundedDistributiveLattice'
-import * as N from '../src/number'
+import * as U from './util.ts'
+import { getMinMaxBoundedDistributiveLattice } from '../deno_dist/BoundedDistributiveLattice.ts'
+import * as N from '../deno_dist/number.ts'
+import {
+  describe,
+  it,
+} from "https://deno.land/std@0.148.0/testing/bdd.ts"
+
 
 describe('BoundedDistributiveLattice', () => {
   it('getMinMaxBoundedDistributiveLattice', () => {
