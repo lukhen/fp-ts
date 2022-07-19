@@ -1,8 +1,12 @@
-import * as U from './util'
-import { getApplicativeComposition } from '../src/Applicative'
-import * as RA from '../src/ReadonlyArray'
-import * as O from '../src/Option'
-import { increment } from '../src/function'
+import * as U from './util.ts'
+import { getApplicativeComposition } from '../deno_dist/Applicative.ts'
+import * as RA from '../deno_dist/ReadonlyArray.ts'
+import * as O from '../deno_dist/Option.ts'
+import { increment } from '../deno_dist/function.ts'
+import {
+  describe,
+  it,
+} from "https://deno.land/std@0.148.0/testing/bdd.ts"
 
 describe('Applicative', () => {
   it('getApplicativeComposition', () => {

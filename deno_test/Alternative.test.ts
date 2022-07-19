@@ -1,6 +1,10 @@
-import * as _ from '../src/Alternative'
-import * as O from '../src/Option'
-import * as U from './util'
+import * as _ from '../deno_dist/Alternative.ts'
+import * as O from '../deno_dist/Option.ts'
+import * as U from './util.ts'
+import {
+  describe,
+  it,
+} from "https://deno.land/std@0.148.0/testing/bdd.ts"
 
 describe('Alternative', () => {
   it('altAll', () => {
