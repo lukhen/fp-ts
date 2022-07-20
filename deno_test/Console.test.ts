@@ -1,5 +1,9 @@
-import * as U from './util'
-import { log, info, error, warn } from '../src/Console'
+import * as U from './util.ts'
+import { log, info, error, warn } from '../deno_dist/Console.ts'
+import {
+  describe,
+  it,
+} from "https://deno.land/std@0.148.0/testing/bdd.ts"
 
 describe('Console', () => {
   it('log', () => {
