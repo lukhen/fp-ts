@@ -1,7 +1,11 @@
-import * as U from './util'
-import * as RA from '../src/ReadonlyArray'
-import { getFunctorComposition } from '../src/Functor'
-import * as option from '../src/Option'
+import * as U from './util.ts'
+import * as RA from '../deno_dist/ReadonlyArray.ts'
+import { getFunctorComposition } from '../deno_dist/Functor.ts'
+import * as option from '../deno_dist/Option.ts'
+import {
+    describe,
+    it
+} from "https://deno.land/std@0.148.0/testing/bdd.ts"
 
 describe('Functor', () => {
   it('getFunctorComposition', () => {

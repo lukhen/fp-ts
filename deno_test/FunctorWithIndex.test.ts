@@ -1,6 +1,10 @@
-import * as U from './util'
-import * as RA from '../src/ReadonlyArray'
-import { getFunctorWithIndexComposition } from '../src/FunctorWithIndex'
+import * as U from './util.ts'
+import * as RA from '../deno_dist/ReadonlyArray.ts'
+import { getFunctorWithIndexComposition } from '../deno_dist/FunctorWithIndex.ts'
+import {
+    describe,
+    it
+} from "https://deno.land/std@0.148.0/testing/bdd.ts"
 
 describe('FunctorWithIndex', () => {
   it('getFunctorComposition', () => {
