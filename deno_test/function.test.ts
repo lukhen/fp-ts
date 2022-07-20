@@ -1,10 +1,14 @@
-import * as assert from 'assert'
-import * as _ from '../src/function'
-import * as B from '../src/boolean'
-import * as RA from '../src/ReadonlyArray'
-import { concatAll } from '../src/Monoid'
-import * as N from '../src/number'
-import * as U from './util'
+import { assertThrows } from "https://deno.land/std@0.148.0/testing/asserts.ts";
+import * as _ from '../deno_dist/function.ts'
+import * as B from '../deno_dist/boolean.ts'
+import * as RA from '../deno_dist/ReadonlyArray.ts'
+import { concatAll } from '../deno_dist/Monoid.ts'
+import * as N from '../deno_dist/number.ts'
+import * as U from './util.ts'
+import {
+    describe,
+    it
+} from "https://deno.land/std@0.148.0/testing/bdd.ts"
 
 const f = (n: number) => n + 1
 const g = (n: number) => n * 2
@@ -56,7 +60,7 @@ describe('function', () => {
   })
 
   it('absurd', () => {
-    assert.throws(() => _.absurd<string>((null as any) as never))
+    assertThrows(() => _.absurd<string>((null as any) as never))
   })
 
   it('flow', () => {
