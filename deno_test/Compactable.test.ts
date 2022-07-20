@@ -1,9 +1,14 @@
-import * as U from './util'
-import * as RA from '../src/ReadonlyArray'
-import { getCompactableComposition } from '../src/Compactable'
-import { none, some } from '../src/Option'
-import { left, right } from '../src/Either'
-import { separated } from '../src/Separated'
+import * as U from './util.ts'
+import * as RA from '../deno_dist/ReadonlyArray.ts'
+import { getCompactableComposition } from '../deno_dist/Compactable.ts'
+import { none, some } from '../deno_dist/Option.ts'
+import { left, right } from '../deno_dist/Either.ts'
+import { separated } from '../deno_dist/Separated.ts'
+import {
+  describe,
+  it,
+} from "https://deno.land/std@0.148.0/testing/bdd.ts"
+
 
 describe('Compactable', () => {
   it('getCompactableComposition', () => {
