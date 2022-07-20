@@ -23,6 +23,8 @@ import { Ring } from './Ring'
 import { Semigroup } from './Semigroup'
 import { Semiring } from './Semiring'
 import { Show } from './Show'
+// @ts-ignore Ignore unused HKT module import for Deno to work 
+import * as HKT from "./HKT"
 
 // -------------------------------------------------------------------------------------
 // model

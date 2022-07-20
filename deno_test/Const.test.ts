@@ -1,8 +1,12 @@
-import * as U from './util'
-import * as _ from '../src/Const'
-import * as N from '../src/number'
-import { pipe } from '../src/function'
-import * as S from '../src/string'
+import * as U from './util.ts'
+import * as _ from '../deno_dist/Const.ts'
+import * as N from '../deno_dist/number.ts'
+import { pipe } from '../deno_dist/function.ts'
+import * as S from '../deno_dist/string.ts'
+import {
+    describe,
+    it
+} from "https://deno.land/std@0.148.0/testing/bdd.ts"
 
 describe('Const', () => {
   describe('pipeables', () => {
