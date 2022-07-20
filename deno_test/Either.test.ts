@@ -1,14 +1,18 @@
-import { sequenceT } from '../src/Apply'
-import * as _ from '../src/Either'
-import { identity, pipe } from '../src/function'
-import * as N from '../src/number'
-import * as O from '../src/Option'
-import * as RA from '../src/ReadonlyArray'
-import { ReadonlyNonEmptyArray } from '../src/ReadonlyNonEmptyArray'
-import { separated } from '../src/Separated'
-import * as S from '../src/string'
-import * as T from '../src/Task'
-import * as U from './util'
+import { sequenceT } from '../deno_dist/Apply.ts'
+import * as _ from '../deno_dist/Either.ts'
+import { identity, pipe } from '../deno_dist/function.ts'
+import * as N from '../deno_dist/number.ts'
+import * as O from '../deno_dist/Option.ts'
+import * as RA from '../deno_dist/ReadonlyArray.ts'
+import { ReadonlyNonEmptyArray } from '../deno_dist/ReadonlyNonEmptyArray.ts'
+import { separated } from '../deno_dist/Separated.ts'
+import * as S from '../deno_dist/string.ts'
+import * as T from '../deno_dist/Task.ts'
+import * as U from './util.ts'
+import {
+    describe,
+    it
+} from "https://deno.land/std@0.148.0/testing/bdd.ts"
 
 describe('Either', () => {
   describe('pipeables', () => {

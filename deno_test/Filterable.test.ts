@@ -1,10 +1,14 @@
-import * as U from './util'
-import * as RA from '../src/ReadonlyArray'
-import { getFilterableComposition } from '../src/Filterable'
-import { some, none } from '../src/Option'
-import { right, left } from '../src/Either'
-import { increment } from '../src/function'
-import { separated } from '../src/Separated'
+import * as U from './util.ts'
+import * as RA from '../deno_dist/ReadonlyArray.ts'
+import { getFilterableComposition } from '../deno_dist/Filterable.ts'
+import { some, none } from '../deno_dist/Option.ts'
+import { right, left } from '../deno_dist/Either.ts'
+import { increment } from '../deno_dist/function.ts'
+import { separated } from '../deno_dist/Separated.ts'
+import {
+    describe,
+    it
+} from "https://deno.land/std@0.148.0/testing/bdd.ts"
 
 describe('Filterable', () => {
   it('getFilterableComposition', () => {

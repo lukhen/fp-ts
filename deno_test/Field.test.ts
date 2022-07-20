@@ -1,6 +1,10 @@
-import * as U from './util'
-import * as _ from '../src/Field'
-import * as N from '../src/number'
+import * as U from './util.ts'
+import * as _ from '../deno_dist/Field.ts'
+import * as N from '../deno_dist/number.ts'
+import {
+    describe,
+    it
+} from "https://deno.land/std@0.148.0/testing/bdd.ts"
 
 describe('Field', () => {
   it('gcd', () => {

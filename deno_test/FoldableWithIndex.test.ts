@@ -1,7 +1,11 @@
-import * as U from './util'
-import * as RA from '../src/ReadonlyArray'
-import { getFoldableWithIndexComposition } from '../src/FoldableWithIndex'
-import * as S from '../src/string'
+import * as U from './util.ts'
+import * as RA from '../deno_dist/ReadonlyArray.ts'
+import { getFoldableWithIndexComposition } from '../deno_dist/FoldableWithIndex.ts'
+import * as S from '../deno_dist/string.ts'
+import {
+    describe,
+    it
+} from "https://deno.land/std@0.148.0/testing/bdd.ts"
 
 describe('FoldableWithIndex', () => {
   it('getFoldableWithIndexComposition', () => {

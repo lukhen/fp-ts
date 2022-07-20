@@ -1,11 +1,15 @@
-import * as U from './util'
-import * as RA from '../src/ReadonlyArray'
-import * as I from '../src/IO'
-import * as O from '../src/Option'
-import * as T from '../src/Tree'
-import * as _ from '../src/Foldable'
-import { pipe } from '../src/function'
-import * as S from '../src/string'
+import * as U from './util.ts'
+import * as RA from '../deno_dist/ReadonlyArray.ts'
+import * as I from '../deno_dist/IO.ts'
+import * as O from '../deno_dist/Option.ts'
+import * as T from '../deno_dist/Tree.ts'
+import * as _ from '../deno_dist/Foldable.ts'
+import { pipe } from '../deno_dist/function.ts'
+import * as S from '../deno_dist/string.ts'
+import {
+    describe,
+    it
+} from "https://deno.land/std@0.148.0/testing/bdd.ts"
 
 export const ArrayOptionURI = 'ArrayOption'
 

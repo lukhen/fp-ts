@@ -1,5 +1,9 @@
-import * as _ from '../src/Endomorphism'
-import * as U from './util'
+import * as _ from '../deno_dist/Endomorphism.ts'
+import * as U from './util.ts'
+import {
+    describe,
+    it
+} from "https://deno.land/std@0.148.0/testing/bdd.ts"
 
 describe('Endomorphism', () => {
   it('getMonoid', () => {

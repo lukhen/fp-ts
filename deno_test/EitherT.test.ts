@@ -1,7 +1,11 @@
-import * as U from './util'
-import * as E from '../src/Either'
-import { getEitherM } from '../src/EitherT'
-import * as I from '../src/IO'
+import * as U from './util.ts'
+import * as E from '../deno_dist/Either.ts'
+import { getEitherM } from '../deno_dist/EitherT.ts'
+import * as I from '../deno_dist/IO.ts'
+import {
+    describe,
+    it
+} from "https://deno.land/std@0.148.0/testing/bdd.ts"
 
 describe('EitherT', () => {
   // tslint:disable-next-line: deprecation
