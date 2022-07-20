@@ -1,7 +1,12 @@
-import * as U from './util'
-import { fanin, splitChoice } from '../src/Choice'
-import { left, right } from '../src/Either'
-import * as R from '../src/Reader'
+import * as U from './util.ts'
+import { fanin, splitChoice, split } from '../deno_dist/Choice.ts'
+import { left, right } from '../deno_dist/Either.ts'
+import * as R from '../deno_dist/Reader.ts'
+import {
+  describe,
+  it,
+} from "https://deno.land/std@0.148.0/testing/bdd.ts"
+
 
 describe('Choice', () => {
   it('splitChoice', () => {

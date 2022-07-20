@@ -18,6 +18,8 @@ import { Profunctor2 } from './Profunctor'
 import { ReadonlyNonEmptyArray } from './ReadonlyNonEmptyArray'
 import { Semigroup } from './Semigroup'
 import { Strong2 } from './Strong'
+// @ts-ignore Ignore unused HKT module import for Deno to work 
+import * as HKT from "./HKT"
 
 // -------------------------------------------------------------------------------------
 // model
