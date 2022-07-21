@@ -24,9 +24,16 @@ const getExportName = (name: string): string => {
   return name.substring(0, 1).toLowerCase() + name.substring(1)
 }
 
+/**
+Remove extension from a file name.
+ASSUME: the file name has an extension of length 2.
+*/
+const removeExtension: (fn: string) => string =
+    fn => fn.slice(0, -3)
+
 function getModuleNames(): ReadonlyArray<string> {
     return [...expandGlobSync("/home/lukh/Desktop/fp_ts/deno_dist/**/*.ts")]
-	.map(f => f.name.slice(0, -3))
+	.map(f => removeExtension(f.name))
 	.filter((name) => name !== 'internal')
 }
 
