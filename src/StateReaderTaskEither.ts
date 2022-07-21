@@ -65,6 +65,8 @@ import { State } from './State'
 import * as ST from './StateT'
 import { Task } from './Task'
 import { TaskEither, URI as TEURI } from './TaskEither'
+// @ts-ignore Ignore unused HKT module import for Deno to work 
+import * as HKT from "./HKT"
 
 // -------------------------------------------------------------------------------------
 // model

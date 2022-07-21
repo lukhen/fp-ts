@@ -71,6 +71,8 @@ import { Refinement } from './Refinement'
 import { Semigroup } from './Semigroup'
 import * as T from './Task'
 import * as TE from './TaskEither'
+// @ts-ignore Ignore unused HKT module import for Deno to work 
+import * as HKT from "./HKT"
 
 import Either = E.Either
 import Task = T.Task

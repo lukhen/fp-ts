@@ -32,6 +32,8 @@ import * as _ from './internal'
 import These = TH.These
 import Task = T.Task
 import { NonEmptyArray } from './NonEmptyArray'
+// @ts-ignore Ignore unused HKT module import for Deno to work 
+import * as HKT from "./HKT"
 
 // -------------------------------------------------------------------------------------
 // model

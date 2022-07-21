@@ -47,6 +47,7 @@ import { getLeft, getRight, Option } from './Option'
 import { not, Predicate } from './Predicate'
 import { Refinement } from './Refinement'
 import { separated, Separated } from './Separated'
+// @ts-ignore Ignore unused HKT module import for Deno to work 
 
 // -------------------------------------------------------------------------------------
 // model

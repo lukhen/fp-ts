@@ -12,6 +12,8 @@ import { NonEmptyArray } from './NonEmptyArray'
 import { Pointed2 } from './Pointed'
 import { ReadonlyNonEmptyArray } from './ReadonlyNonEmptyArray'
 import * as _ from './internal'
+// @ts-ignore Ignore unused HKT module import for Deno to work 
+import * as HKT from "./HKT"
 
 // -------------------------------------------------------------------------------------
 // model

@@ -38,6 +38,8 @@ import * as RT from './ReaderT'
 import { ReadonlyNonEmptyArray } from './ReadonlyNonEmptyArray'
 import { Semigroup } from './Semigroup'
 import * as T from './Task'
+// @ts-ignore Ignore unused HKT module import for Deno to work 
+import * as HKT from "./HKT"
 
 // -------------------------------------------------------------------------------------
 // model

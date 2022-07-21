@@ -14,6 +14,8 @@ import {
   NaturalTransformation24S
 } from './NaturalTransformation'
 import * as S from './State'
+// @ts-ignore Ignore unused HKT module import for Deno to work 
+import * as HKT from "./HKT"
 
 import State = S.State
 

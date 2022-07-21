@@ -55,6 +55,8 @@ import * as R from './Reader'
 import { ReadonlyNonEmptyArray } from './ReadonlyNonEmptyArray'
 import { Refinement } from './Refinement'
 import { Semigroup } from './Semigroup'
+// @ts-ignore Ignore unused HKT module import for Deno to work 
+import * as HKT from "./HKT"
 
 import Reader = R.Reader
 import Either = E.Either

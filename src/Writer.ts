@@ -10,6 +10,8 @@ import { Monad2C } from './Monad'
 import { Monoid } from './Monoid'
 import { Pointed2C } from './Pointed'
 import { Semigroup } from './Semigroup'
+// @ts-ignore Ignore unused HKT module import for Deno to work 
+import * as HKT from "./HKT"
 
 // -------------------------------------------------------------------------------------
 // model

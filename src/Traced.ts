@@ -5,6 +5,8 @@ import { Comonad2C } from './Comonad'
 import { flap as flap_, Functor2 } from './Functor'
 import { Monoid } from './Monoid'
 import { pipe } from './function'
+// @ts-ignore Ignore unused HKT module import for Deno to work 
+import * as HKT from "./HKT"
 
 // -------------------------------------------------------------------------------------
 // model
