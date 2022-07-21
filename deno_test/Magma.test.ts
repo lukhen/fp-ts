@@ -1,7 +1,11 @@
-import { increment, pipe } from '../src/function'
-import * as _ from '../src/Magma'
-import * as N from '../src/number'
-import * as U from './util'
+import { increment, pipe } from '../deno_dist/function.ts'
+import * as _ from '../deno_dist/Magma.ts'
+import * as N from '../deno_dist/number.ts'
+import * as U from './util.ts'
+import {
+    describe,
+    it
+} from "https://deno.land/std@0.148.0/testing/bdd.ts"
 
 describe('Magma', () => {
   it('reverse', () => {

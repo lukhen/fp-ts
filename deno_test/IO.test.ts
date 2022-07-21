@@ -1,10 +1,14 @@
-import * as E from '../src/Either'
-import { pipe } from '../src/function'
-import * as _ from '../src/IO'
-import * as N from '../src/number'
-import * as RA from '../src/ReadonlyArray'
-import { ReadonlyNonEmptyArray } from '../src/ReadonlyNonEmptyArray'
-import * as U from './util'
+import * as E from '../deno_dist/Either.ts'
+import { pipe } from '../deno_dist/function.ts'
+import * as _ from '../deno_dist/IO.ts'
+import * as N from '../deno_dist/number.ts'
+import * as RA from '../deno_dist/ReadonlyArray.ts'
+import { ReadonlyNonEmptyArray } from '../deno_dist/ReadonlyNonEmptyArray.ts'
+import * as U from './util.ts'
+import {
+    describe,
+    it
+} from "https://deno.land/std@0.148.0/testing/bdd.ts"
 
 describe('IO', () => {
   describe('pipeables', () => {

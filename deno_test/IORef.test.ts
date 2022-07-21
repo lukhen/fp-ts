@@ -1,7 +1,11 @@
-import * as U from './util'
-import * as I from '../src/IO'
-import { IORef, newIORef } from '../src/IORef'
-import { pipe } from '../src/function'
+import * as U from './util.ts'
+import * as I from '../deno_dist/IO.ts'
+import { IORef, newIORef } from '../deno_dist/IORef.ts'
+import { pipe } from '../deno_dist/function.ts'
+import {
+    describe,
+    it
+} from "https://deno.land/std@0.148.0/testing/bdd.ts"
 
 describe('IORef', () => {
   it('read', () => {

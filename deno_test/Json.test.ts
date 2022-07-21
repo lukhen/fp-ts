@@ -1,7 +1,11 @@
-import * as E from '../src/Either'
-import { pipe } from '../src/function'
-import * as _ from '../src/Json'
-import * as U from './util'
+import * as E from '../deno_dist/Either.ts'
+import { pipe } from '../deno_dist/function.ts'
+import * as _ from '../deno_dist/Json.ts'
+import * as U from './util.ts'
+import {
+    describe,
+    it
+} from "https://deno.land/std@0.148.0/testing/bdd.ts"
 
 describe('Json', () => {
   it('parse', () => {
