@@ -1,21 +1,26 @@
-import { sequenceT } from '../src/Apply'
-import * as E from '../src/Either'
-import { flow, pipe, SK } from '../src/function'
-import * as I from '../src/IO'
-import * as IE from '../src/IOEither'
-import * as N from '../src/number'
-import * as O from '../src/Option'
-import * as R from '../src/Reader'
-import * as RE from '../src/ReaderEither'
-import * as RT from '../src/ReaderTask'
-import * as _ from '../src/ReaderTaskEither'
-import * as RA from '../src/ReadonlyArray'
-import { ReadonlyNonEmptyArray } from '../src/ReadonlyNonEmptyArray'
-import { left, right } from '../src/Separated'
-import * as S from '../src/string'
-import * as T from '../src/Task'
-import * as TE from '../src/TaskEither'
-import * as U from './util'
+import { sequenceT } from '../deno_dist/Apply.ts'
+import * as E from '../deno_dist/Either.ts'
+import { flow, pipe, SK } from '../deno_dist/function.ts'
+import * as I from '../deno_dist/IO.ts'
+import * as IE from '../deno_dist/IOEither.ts'
+import * as N from '../deno_dist/number.ts'
+import * as O from '../deno_dist/Option.ts'
+import * as R from '../deno_dist/Reader.ts'
+import * as RE from '../deno_dist/ReaderEither.ts'
+import * as RT from '../deno_dist/ReaderTask.ts'
+import * as _ from '../deno_dist/ReaderTaskEither.ts'
+import * as RA from '../deno_dist/ReadonlyArray.ts'
+import { ReadonlyNonEmptyArray } from '../deno_dist/ReadonlyNonEmptyArray.ts'
+import { left, right } from '../deno_dist/Separated.ts'
+import * as S from '../deno_dist/string.ts'
+import * as T from '../deno_dist/Task.ts'
+import * as TE from '../deno_dist/TaskEither.ts'
+import * as U from './util.ts'
+import {
+    describe,
+    it,
+    beforeEach
+} from "https://deno.land/std@0.148.0/testing/bdd.ts"
 
 describe('ReaderTaskEither', () => {
   describe('pipeables', () => {

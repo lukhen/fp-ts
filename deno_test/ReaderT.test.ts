@@ -1,8 +1,12 @@
-import * as E from '../src/Either'
-import * as IO from '../src/IO'
-import * as _ from '../src/ReaderT'
-import * as TE from '../src/TaskEither'
-import * as U from './util'
+import * as E from '../deno_dist/Either.ts'
+import * as IO from '../deno_dist/IO.ts'
+import * as _ from '../deno_dist/ReaderT.ts'
+import * as TE from '../deno_dist/TaskEither.ts'
+import * as U from './util.ts'
+import {
+    describe,
+    it
+} from "https://deno.land/std@0.148.0/testing/bdd.ts"
 
 describe('ReaderT', () => {
   it('fromNaturalTransformation', async () => {

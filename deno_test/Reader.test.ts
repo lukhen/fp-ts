@@ -1,10 +1,14 @@
-import { pipe } from '../src/function'
-import * as N from '../src/number'
-import * as _ from '../src/Reader'
-import * as RA from '../src/ReadonlyArray'
-import { ReadonlyNonEmptyArray } from '../src/ReadonlyNonEmptyArray'
-import * as S from '../src/string'
-import * as U from './util'
+import { pipe } from '../deno_dist/function.ts'
+import * as N from '../deno_dist/number.ts'
+import * as _ from '../deno_dist/Reader.ts'
+import * as RA from '../deno_dist/ReadonlyArray.ts'
+import { ReadonlyNonEmptyArray } from '../deno_dist/ReadonlyNonEmptyArray.ts'
+import * as S from '../deno_dist/string.ts'
+import * as U from './util.ts'
+import {
+    describe,
+    it
+} from "https://deno.land/std@0.148.0/testing/bdd.ts"
 
 interface Env {
   readonly count: number

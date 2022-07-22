@@ -1,6 +1,10 @@
-import { pipe } from '../src/function'
-import * as _ from '../src/Predicate'
-import * as U from './util'
+import { pipe } from '../deno_dist/function.ts'
+import * as _ from '../deno_dist/Predicate.ts'
+import * as U from './util.ts'
+import {
+    describe,
+    it
+} from "https://deno.land/std@0.148.0/testing/bdd.ts"
 
 const isPositive: _.Predicate<number> = (n) => n > 0
 const isNegative: _.Predicate<number> = (n) => n < 0

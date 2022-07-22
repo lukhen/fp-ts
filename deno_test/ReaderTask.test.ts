@@ -1,14 +1,18 @@
-import { pipe, SK } from '../src/function'
-import * as I from '../src/IO'
-import { monoidString } from '../src/Monoid'
-import * as R from '../src/Reader'
-import * as _ from '../src/ReaderTask'
-import * as RA from '../src/ReadonlyArray'
-import { ReadonlyNonEmptyArray } from '../src/ReadonlyNonEmptyArray'
-import { semigroupString } from '../src/Semigroup'
-import * as S from '../src/string'
-import * as T from '../src/Task'
-import * as U from './util'
+import { pipe, SK } from '../deno_dist/function.ts'
+import * as I from '../deno_dist/IO.ts'
+import { monoidString } from '../deno_dist/Monoid.ts'
+import * as R from '../deno_dist/Reader.ts'
+import * as _ from '../deno_dist/ReaderTask.ts'
+import * as RA from '../deno_dist/ReadonlyArray.ts'
+import { ReadonlyNonEmptyArray } from '../deno_dist/ReadonlyNonEmptyArray.ts'
+import { semigroupString } from '../deno_dist/Semigroup.ts'
+import * as S from '../deno_dist/string.ts'
+import * as T from '../deno_dist/Task.ts'
+import * as U from './util.ts'
+import {
+    describe,
+    it
+} from "https://deno.land/std@0.148.0/testing/bdd.ts"
 
 describe('ReaderTask', () => {
   // -------------------------------------------------------------------------------------
