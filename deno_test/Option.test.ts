@@ -1,13 +1,17 @@
-import * as U from './util'
-import { left, right } from '../src/Either'
-import { identity, pipe } from '../src/function'
-import * as N from '../src/number'
-import * as _ from '../src/Option'
-import * as RA from '../src/ReadonlyArray'
-import * as S from '../src/string'
-import * as T from '../src/Task'
-import { separated } from '../src/Separated'
-import { ReadonlyNonEmptyArray } from '../src/ReadonlyNonEmptyArray'
+import * as U from './util.ts'
+import { left, right } from '../deno_dist/Either.ts'
+import { identity, pipe } from '../deno_dist/function.ts'
+import * as N from '../deno_dist/number.ts'
+import * as _ from '../deno_dist/Option.ts'
+import * as RA from '../deno_dist/ReadonlyArray.ts'
+import * as S from '../deno_dist/string.ts'
+import * as T from '../deno_dist/Task.ts'
+import { separated } from '../deno_dist/Separated.ts'
+import { ReadonlyNonEmptyArray } from '../deno_dist/ReadonlyNonEmptyArray.ts'
+import {
+    describe,
+    it
+} from "https://deno.land/std@0.148.0/testing/bdd.ts"
 
 const p = (n: number): boolean => n > 2
 

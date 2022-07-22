@@ -1,7 +1,11 @@
-import * as U from './util'
-import * as O from '../src/Option'
-import { getOptionM } from '../src/OptionT'
-import * as T from '../src/Task'
+import * as U from './util.ts'
+import * as O from '../deno_dist/Option.ts'
+import { getOptionM } from '../deno_dist/OptionT.ts'
+import * as T from '../deno_dist/Task.ts'
+import {
+    describe,
+    it
+} from "https://deno.land/std@0.148.0/testing/bdd.ts"
 
 // tslint:disable-next-line: deprecation
 const MT = getOptionM(T.Monad)

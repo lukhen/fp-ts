@@ -1,5 +1,9 @@
-import * as U from './util'
-import * as _ from '../src/Ordering'
+import * as U from './util.ts'
+import * as _ from '../deno_dist/Ordering.ts'
+import {
+    describe,
+    it
+} from "https://deno.land/std@0.148.0/testing/bdd.ts"
 
 describe('Ordering', () => {
   // -------------------------------------------------------------------------------------

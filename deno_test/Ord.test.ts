@@ -1,12 +1,16 @@
-import * as B from '../src/boolean'
-import { pipe } from '../src/function'
-import { concatAll } from '../src/Monoid'
-import * as N from '../src/number'
-import * as _ from '../src/Ord'
-import { sort } from '../src/ReadonlyArray'
-import * as RR from '../src/ReadonlyRecord'
-import * as S from '../src/string'
-import * as U from './util'
+import * as B from '../deno_dist/boolean.ts'
+import { pipe } from '../deno_dist/function.ts'
+import { concatAll } from '../deno_dist/Monoid.ts'
+import * as N from '../deno_dist/number.ts'
+import * as _ from '../deno_dist/Ord.ts'
+import { sort } from '../deno_dist/ReadonlyArray.ts'
+import * as RR from '../deno_dist/ReadonlyRecord.ts'
+import * as S from '../deno_dist/string.ts'
+import * as U from './util.ts'
+import {
+    describe,
+    it
+} from "https://deno.land/std@0.148.0/testing/bdd.ts"
 
 describe('Ord', () => {
   it('tuple', () => {
