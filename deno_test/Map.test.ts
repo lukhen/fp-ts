@@ -1,19 +1,23 @@
-import * as assert from 'assert'
-import { Either, left, right } from '../src/Either'
-import { Eq, fromEquals } from '../src/Eq'
-import { identity, pipe } from '../src/function'
-import * as _ from '../src/Map'
-import * as N from '../src/number'
-import * as O from '../src/Option'
-import * as Ord from '../src/Ord'
-import * as RA from '../src/ReadonlyArray'
-import { Refinement } from '../src/Refinement'
-import * as Se from '../src/Semigroup'
-import { separated } from '../src/Separated'
-import { Show, struct } from '../src/Show'
-import * as S from '../src/string'
-import * as T from '../src/Task'
-import * as U from './util'
+import { assertEquals, assertStrictEquals } from "https://deno.land/std@0.148.0/testing/asserts.ts";
+import { Either, left, right } from '../deno_dist/Either.ts'
+import { Eq, fromEquals } from '../deno_dist/Eq.ts'
+import { identity, pipe } from '../deno_dist/function.ts'
+import * as _ from '../deno_dist/Map.ts'
+import * as N from '../deno_dist/number.ts'
+import * as O from '../deno_dist/Option.ts'
+import * as Ord from '../deno_dist/Ord.ts'
+import * as RA from '../deno_dist/ReadonlyArray.ts'
+import { Refinement } from '../deno_dist/Refinement.ts'
+import * as Se from '../deno_dist/Semigroup.ts'
+import { separated } from '../deno_dist/Separated.ts'
+import { Show, struct } from '../deno_dist/Show.ts'
+import * as S from '../deno_dist/string.ts'
+import * as T from '../deno_dist/Task.ts'
+import * as U from './util.ts'
+import {
+    describe,
+    it
+} from "https://deno.land/std@0.148.0/testing/bdd.ts"
 
 interface User {
   readonly id: string
@@ -472,6 +476,10 @@ describe('Map', () => {
   })
 
   it('lookupWithKey', () => {
+    type Id<A> = { id: A }
+    const idConstr: <A>(a: A) => Id<A> =
+	  a => ({id: a})
+	
     const x = new Map<User, number>([[{ id: 'a' }, 1]])
     const lookupWithKeyS = _.lookupWithKey(eqUser)
     U.deepStrictEqual(lookupWithKeyS({ id: 'a' }, x), O.some([{ id: 'a' }, 1]))
@@ -480,11 +488,19 @@ describe('Map', () => {
     U.deepStrictEqual(lookupWithKeyS({ id: 'b' })(x), O.none)
 
     const lookupWithKey = _.lookupWithKey(eqKey)
-    assert.deepStrictEqual(lookupWithKey({ id: 1 }, repo), O.some([{ id: 1 }, { value: 1 }]))
-    assert.deepStrictEqual(lookupWithKey({ id: 4 }, repo), O.some([{ id: 1 }, { value: 1 }]))
+    assertEquals(lookupWithKey({ id: 1 }, repo),
+		 O.some([idConstr(1), { value: 1 }]
+		       ))
+    assertEquals(lookupWithKey({ id: 4 }, repo),
+		 O.some([idConstr(1), { value: 1 }]
+		       ))
     U.deepStrictEqual(lookupWithKey({ id: 3 }, repo), O.none)
-    assert.deepStrictEqual(lookupWithKey({ id: 1 })(repo), O.some([{ id: 1 }, { value: 1 }]))
-    assert.deepStrictEqual(lookupWithKey({ id: 4 })(repo), O.some([{ id: 1 }, { value: 1 }]))
+    assertEquals(lookupWithKey({ id: 1 })(repo),
+		 O.some([idConstr(1), { value: 1 }]
+		       ))
+    assertEquals(lookupWithKey({ id: 4 })(repo),
+		 O.some([idConstr(1), { value: 1 }]
+		       ))
     U.deepStrictEqual(lookupWithKey({ id: 3 })(repo), O.none)
   })
 
