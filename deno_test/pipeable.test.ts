@@ -1,15 +1,18 @@
-import * as U from './util'
-import * as RA from '../src/ReadonlyArray'
-import * as C from '../src/Const'
-import * as E from '../src/Either'
-import { fold } from '../src/Monoid'
-import * as O from '../src/Option'
-import { pipeable } from '../src/pipeable'
-import * as R from '../src/Reader'
-import { pipe } from '../src/function'
-import * as N from '../src/number'
-import { separated } from '../src/Separated'
-import * as assert from 'assert'
+import * as U from './util.ts'
+import * as RA from '../deno_dist/ReadonlyArray.ts'
+import * as C from '../deno_dist/Const.ts'
+import * as E from '../deno_dist/Either.ts'
+import { fold } from '../deno_dist/Monoid.ts'
+import * as O from '../deno_dist/Option.ts'
+import { pipeable } from '../deno_dist/pipeable.ts'
+import * as R from '../deno_dist/Reader.ts'
+import { pipe } from '../deno_dist/function.ts'
+import * as N from '../deno_dist/number.ts'
+import { separated, Separated } from '../deno_dist/Separated.ts'
+import {
+    describe,
+    it
+} from "https://deno.land/std@0.148.0/testing/bdd.ts"
 
 // tslint:disable: deprecation
 
@@ -99,8 +102,11 @@ describe('pipeable', () => {
       O.Some<number>
     >)
     U.deepStrictEqual(filterMap(<A>(a: O.Option<A>) => a)([O.some(1), O.none, O.some(2)]), [1, 2])
-    assert.deepStrictEqual(
-      pipe([O.some(1), O.none, O.some(2)], partition(O.isSome)),
+    U.deepStrictEqual(
+      pipe(
+	  [O.some(1), O.none, O.some(2)],
+	  partition(O.isSome)
+      ) as Separated<O.Option<number>[], O.Option<number>[]>,
       separated([O.none], [O.some(1), O.some(2)])
     )
     U.deepStrictEqual(
