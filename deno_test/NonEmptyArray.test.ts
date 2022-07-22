@@ -1,11 +1,19 @@
-import * as assert from 'assert'
-import { Endomorphism } from '../src/Endomorphism'
-import { identity, pipe } from '../src/function'
-import * as _ from '../src/NonEmptyArray'
-import * as N from '../src/number'
-import * as O from '../src/Option'
-import * as S from '../src/string'
-import * as U from './util'
+import { fail } from "https://deno.land/std@0.148.0/testing/asserts.ts";
+import { Endomorphism } from '../deno_dist/Endomorphism.ts'
+import { identity, pipe } from '../deno_dist/function.ts'
+import * as _ from '../deno_dist/NonEmptyArray.ts'
+import * as N from '../deno_dist/number.ts'
+import * as O from '../deno_dist/Option.ts'
+import * as S from '../deno_dist/string.ts'
+import * as U from './util.ts'
+import {
+    describe,
+    it
+} from "https://deno.land/std@0.148.0/testing/bdd.ts"
+
+const assert = {
+    fail
+}
 
 describe('NonEmptyArray', () => {
   describe('pipeables', () => {
