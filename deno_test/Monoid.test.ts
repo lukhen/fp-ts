@@ -1,9 +1,13 @@
-import * as B from '../src/boolean'
-import { increment } from '../src/function'
-import * as _ from '../src/Monoid'
-import * as N from '../src/number'
-import * as S from '../src/string'
-import * as U from './util'
+import * as B from '../deno_dist/boolean.ts'
+import { increment } from '../deno_dist/function.ts'
+import * as _ from '../deno_dist/Monoid.ts'
+import * as N from '../deno_dist/number.ts'
+import * as S from '../deno_dist/string.ts'
+import * as U from './util.ts'
+import {
+    describe,
+    it
+} from "https://deno.land/std@0.148.0/testing/bdd.ts"
 
 describe('Monoid', () => {
   it('tuple', () => {
