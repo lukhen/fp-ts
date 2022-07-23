@@ -1,8 +1,12 @@
-import * as B from '../src/boolean'
-import * as N from '../src/number'
-import * as _ from '../src/Semigroup'
-import * as S from '../src/string'
-import * as U from './util'
+import * as B from '../deno_dist/boolean.ts'
+import * as N from '../deno_dist/number.ts'
+import * as _ from '../deno_dist/Semigroup.ts'
+import * as S from '../deno_dist/string.ts'
+import * as U from './util.ts'
+import {
+    describe,
+    it
+} from "https://deno.land/std@0.148.0/testing/bdd.ts"
 
 describe('Semigroup', () => {
   it('tuple', () => {

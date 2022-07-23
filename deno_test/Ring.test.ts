@@ -1,6 +1,10 @@
-import * as U from './util'
-import * as N from '../src/number'
-import * as _ from '../src/Ring'
+import * as U from './util.ts'
+import * as N from '../deno_dist/number.ts'
+import * as _ from '../deno_dist/Ring.ts'
+import {
+    describe,
+    it
+} from "https://deno.land/std@0.148.0/testing/bdd.ts"
 
 describe('Ring', () => {
   it('tuple', () => {

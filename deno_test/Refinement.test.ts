@@ -1,12 +1,16 @@
-import * as B from '../src/boolean'
-import * as E from '../src/Either'
-import { pipe } from '../src/function'
-import * as N from '../src/number'
-import * as O from '../src/Option'
-import { ReadonlyRecord } from '../src/ReadonlyRecord'
-import * as _ from '../src/Refinement'
-import * as S from '../src/string'
-import * as U from './util'
+import * as B from '../deno_dist/boolean.ts'
+import * as E from '../deno_dist/Either.ts'
+import { pipe } from '../deno_dist/function.ts'
+import * as N from '../deno_dist/number.ts'
+import * as O from '../deno_dist/Option.ts'
+import { ReadonlyRecord } from '../deno_dist/ReadonlyRecord.ts'
+import * as _ from '../deno_dist/Refinement.ts'
+import * as S from '../deno_dist/string.ts'
+import * as U from './util.ts'
+import {
+    describe,
+    it
+} from "https://deno.land/std@0.148.0/testing/bdd.ts"
 
 interface NonEmptyStringBrand {
   readonly NonEmptyString: unique symbol
