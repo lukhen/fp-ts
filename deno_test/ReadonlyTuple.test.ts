@@ -1,11 +1,21 @@
-import * as U from './util'
-import { getMonoid } from '../src/Array'
-import { left, right } from '../src/Either'
-import { identity, pipe } from '../src/function'
-import * as S from '../src/string'
-import * as O from '../src/Option'
-import * as _ from '../src/ReadonlyTuple'
-import * as assert from 'assert'
+import * as U from './util.ts'
+import { getMonoid } from '../deno_dist/Array.ts'
+import { left, right } from '../deno_dist/Either.ts'
+import { identity, pipe } from '../deno_dist/function.ts'
+import * as S from '../deno_dist/string.ts'
+import * as O from '../deno_dist/Option.ts'
+import * as _ from '../deno_dist/ReadonlyTuple.ts'
+import {
+    describe,
+    it
+} from "https://deno.land/std@0.148.0/testing/bdd.ts"
+import { assertNotStrictEquals, fail} from "https://deno.land/std@0.148.0/testing/asserts.ts";
+
+const assert = {
+    deepStrictEqual: U.deepStrictEqual,
+    notStrictEqual: assertNotStrictEquals,
+    fail
+}
 
 describe('ReadonlyTuple', () => {
   describe('pipeables', () => {
@@ -64,13 +74,13 @@ describe('ReadonlyTuple', () => {
 
     it('traverse', () => {
       const traverse = _.traverse(O.Applicative)((n: number) => (n > 1 ? O.some(n) : O.none))
-      assert.deepStrictEqual(traverse([2, 'a']), O.some([2, 'a']))
+	assert.deepStrictEqual(traverse([2, 'a']), O.some([2, 'a']) as O.Option<[number, string]>)
       U.deepStrictEqual(traverse([1, 'a']), O.none)
     })
 
     it('sequence', () => {
       const sequence = _.sequence(O.Applicative)
-      assert.deepStrictEqual(sequence([O.some(1), 'a']), O.some([1, 'a']))
+      assert.deepStrictEqual(sequence([O.some(1), 'a']), O.some([1, 'a']) as O.Option<[number, string]>)
       U.deepStrictEqual(sequence([O.none, 'a']), O.none)
     })
   })
