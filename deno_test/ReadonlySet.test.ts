@@ -1,14 +1,24 @@
-import * as assert from 'assert'
-import { getMonoid } from '../src/Array'
-import { left, right } from '../src/Either'
-import * as Eq from '../src/Eq'
-import { pipe } from '../src/function'
-import { none, some as optionSome } from '../src/Option'
-import * as _ from '../src/ReadonlySet'
-import * as S from '../src/string'
-import * as N from '../src/number'
-import * as U from './util'
-import { separated } from '../src/Separated'
+import { getMonoid } from '../deno_dist/Array.ts'
+import { left, right } from '../deno_dist/Either.ts'
+import * as Eq from '../deno_dist/Eq.ts'
+import { pipe } from '../deno_dist/function.ts'
+import { none, some as optionSome } from '../deno_dist/Option.ts'
+import * as _ from '../deno_dist/ReadonlySet.ts'
+import * as S from '../deno_dist/string.ts'
+import * as N from '../deno_dist/number.ts'
+import * as U from './util.ts'
+import { separated } from '../deno_dist/Separated.ts'
+import {
+    describe,
+    it
+} from "https://deno.land/std@0.148.0/testing/bdd.ts"
+import { assertNotStrictEquals, fail} from "https://deno.land/std@0.148.0/testing/asserts.ts";
+
+const assert = {
+    deepStrictEqual: U.deepStrictEqual,
+    notStrictEqual: assertNotStrictEquals,
+    fail
+}
 
 const gte2 = (n: number) => n >= 2
 
