@@ -1,15 +1,26 @@
-import * as assert from 'assert'
-import * as B from '../src/boolean'
-import { Endomorphism } from '../src/Endomorphism'
-import * as Eq from '../src/Eq'
-import { identity, pipe } from '../src/function'
-import * as N from '../src/number'
-import * as O from '../src/Option'
-import * as Ord from '../src/Ord'
-import * as _ from '../src/ReadonlyNonEmptyArray'
-import * as Se from '../src/Semigroup'
-import * as S from '../src/string'
-import * as U from './util'
+import * as B from '../deno_dist/boolean.ts'
+import { Endomorphism } from '../deno_dist/Endomorphism.ts'
+import * as Eq from '../deno_dist/Eq.ts'
+import { identity, pipe } from '../deno_dist/function.ts'
+import * as N from '../deno_dist/number.ts'
+import * as O from '../deno_dist/Option.ts'
+import * as Ord from '../deno_dist/Ord.ts'
+import * as _ from '../deno_dist/ReadonlyNonEmptyArray.ts'
+import * as Se from '../deno_dist/Semigroup.ts'
+import * as S from '../deno_dist/string.ts'
+import * as U from './util.ts'
+import {
+    describe,
+    it
+} from "https://deno.land/std@0.148.0/testing/bdd.ts"
+import { assertNotStrictEquals, assert as assertOk, fail} from "https://deno.land/std@0.148.0/testing/asserts.ts";
+
+const assert = {
+    deepStrictEqual: U.deepStrictEqual,
+    notStrictEqual: assertNotStrictEquals,
+    fail
+}
+
 
 describe('ReadonlyNonEmptyArray', () => {
   describe('pipeables', () => {
@@ -19,7 +30,7 @@ describe('ReadonlyNonEmptyArray', () => {
           [1, 2, 3],
           _.traverse(O.Applicative)((n) => (n >= 0 ? O.some(n) : O.none))
         ),
-        O.some([1, 2, 3])
+        O.some([1, 2, 3]) as O.Option<_.ReadonlyNonEmptyArray<number>>
       )
       U.deepStrictEqual(
         pipe(
@@ -32,7 +43,10 @@ describe('ReadonlyNonEmptyArray', () => {
 
     it('sequence', () => {
       const sequence = _.sequence(O.Applicative)
-      assert.deepStrictEqual(sequence([O.some(1), O.some(2), O.some(3)]), O.some([1, 2, 3]))
+      assert.deepStrictEqual(
+	  sequence([O.some(1), O.some(2), O.some(3)]),
+	  O.some([1, 2, 3]) as O.Option<_.ReadonlyNonEmptyArray<number>>
+      )
       U.deepStrictEqual(sequence([O.none, O.some(2), O.some(3)]), O.none)
     })
 
@@ -42,7 +56,7 @@ describe('ReadonlyNonEmptyArray', () => {
           ['a', 'bb'],
           _.traverseWithIndex(O.Applicative)((i, s) => (s.length >= 1 ? O.some(s + i) : O.none))
         ),
-        O.some(['a0', 'bb1'])
+        O.some(['a0', 'bb1']) as O.Option<_.ReadonlyNonEmptyArray<string>>
       )
       U.deepStrictEqual(
         pipe(
@@ -94,7 +108,7 @@ describe('ReadonlyNonEmptyArray', () => {
   it('extend', () => {
     const sum = (as: _.ReadonlyNonEmptyArray<number>): number => {
       const head = _.head(as)
-      assert.ok(typeof (head as any) === 'number')
+	assertOk(typeof (head as any) === 'number')
       return Se.concatAll(N.MonoidSum)(head)(_.tail(as))
     }
     U.deepStrictEqual(pipe([1, 2, 3, 4], _.extend(sum)), [10, 9, 7, 4])
@@ -136,8 +150,14 @@ describe('ReadonlyNonEmptyArray', () => {
 
   it('fromReadonlyArray', () => {
     U.deepStrictEqual(_.fromReadonlyArray([]), O.none)
-    assert.deepStrictEqual(_.fromReadonlyArray([1]), O.some([1]))
-    assert.deepStrictEqual(_.fromReadonlyArray([1, 2]), O.some([1, 2]))
+    assert.deepStrictEqual(
+	_.fromReadonlyArray([1]),
+	O.some([1])  as O.Option<_.ReadonlyNonEmptyArray<number>>
+    )
+    assert.deepStrictEqual(
+	_.fromReadonlyArray([1, 2]),
+	O.some([1, 2])  as O.Option<_.ReadonlyNonEmptyArray<number>>
+    )
   })
 
   it('getSemigroup', () => {
@@ -214,6 +234,7 @@ describe('ReadonlyNonEmptyArray', () => {
   })
 
   it('insertAt', () => {
+    type X = {x : number}
     const make = (x: number) => ({ x })
     const a1 = make(1)
     const a2 = make(1)
@@ -222,28 +243,41 @@ describe('ReadonlyNonEmptyArray', () => {
     // tslint:disable-next-line: deprecation
     U.deepStrictEqual(pipe([], _.insertAt(1, 1)), O.none)
     // tslint:disable-next-line: deprecation
-    assert.deepStrictEqual(_.insertAt(0, a4)([a1, a2, a3]), O.some([a4, a1, a2, a3]))
+      assert.deepStrictEqual(
+	  _.insertAt(0, a4)([a1, a2, a3]),
+	  O.some([a4, a1, a2, a3])  as O.Option<_.ReadonlyNonEmptyArray<X>>
+      )
     // tslint:disable-next-line: deprecation
     U.deepStrictEqual(_.insertAt(-1, a4)([a1, a2, a3]), O.none)
     // tslint:disable-next-line: deprecation
-    assert.deepStrictEqual(_.insertAt(3, a4)([a1, a2, a3]), O.some([a1, a2, a3, a4]))
+      assert.deepStrictEqual(
+	  _.insertAt(3, a4)([a1, a2, a3]),
+	  O.some([a1, a2, a3, a4]) as O.Option<_.ReadonlyNonEmptyArray<X>>
+      )
     // tslint:disable-next-line: deprecation
-    assert.deepStrictEqual(_.insertAt(1, a4)([a1, a2, a3]), O.some([a1, a4, a2, a3]))
+      assert.deepStrictEqual(
+	  _.insertAt(1, a4)([a1, a2, a3]),
+	  O.some([a1, a4, a2, a3]) as O.Option<_.ReadonlyNonEmptyArray<X>>
+      )
     // tslint:disable-next-line: deprecation
     U.deepStrictEqual(_.insertAt(4, a4)([a1, a2, a3]), O.none)
   })
 
   it('updateAt', () => {
+    type X = {x : number}
     const make2 = (x: number) => ({ x })
     const a1 = make2(1)
     const a2 = make2(1)
     const a3 = make2(2)
     const a4 = make2(3)
-    const arr: _.ReadonlyNonEmptyArray<{ readonly x: number }> = [a1, a2, a3]
-    assert.deepStrictEqual(_.updateAt(0, a4)(arr), O.some([a4, a2, a3]))
+    const arr: _.ReadonlyNonEmptyArray<{ readonly x: number }> = [a1, a2, a3] 
     U.deepStrictEqual(_.updateAt(-1, a4)(arr), O.none)
     U.deepStrictEqual(_.updateAt(3, a4)(arr), O.none)
-    assert.deepStrictEqual(_.updateAt(1, a4)(arr), O.some([a1, a4, a3]))
+      assert.deepStrictEqual(
+	  _.updateAt(1, a4)(arr),
+	  O.some([a1, a4, a3]) as O.Option<_.ReadonlyNonEmptyArray<X>>
+      )
+  
     // should return the same reference if nothing changed
     const r1 = _.updateAt(0, a1)(arr)
     if (O.isSome(r1)) {
@@ -275,32 +309,38 @@ describe('ReadonlyNonEmptyArray', () => {
   })
 
   it('filter', () => {
+    type X = {x : number}
     const make = (x: number) => ({ x })
     const a1 = make(1)
     const a2 = make(1)
     const a3 = make(2)
-    assert.deepStrictEqual(_.filter(({ x }) => x !== 1)([a1, a2, a3]), O.some([a3]))
-    assert.deepStrictEqual(_.filter(({ x }) => x !== 2)([a1, a2, a3]), O.some([a1, a2]))
+    assert.deepStrictEqual(_.filter(({ x }) => x !== 1)([a1, a2, a3]), O.some([a3]) as O.Option<_.ReadonlyNonEmptyArray<X>>)
+    assert.deepStrictEqual(_.filter(({ x }) => x !== 2)([a1, a2, a3]), O.some([a1, a2]) as O.Option<_.ReadonlyNonEmptyArray<X>>)
     U.deepStrictEqual(
       _.filter(({ x }) => {
         return !(x === 1 || x === 2)
       })([a1, a2, a3]),
       O.none
     )
-    assert.deepStrictEqual(_.filter(({ x }) => x !== 10)([a1, a2, a3]), O.some([a1, a2, a3]))
+    assert.deepStrictEqual(_.filter(({ x }) => x !== 10)([a1, a2, a3]), O.some([a1, a2, a3]) as O.Option<_.ReadonlyNonEmptyArray<X>>)
 
     // refinements
     // tslint:disable-next-line: deprecation
     const actual1 = _.filter(O.isSome)([O.some(3), O.some(2), O.some(1)])
-    assert.deepStrictEqual(actual1, O.some([O.some(3), O.some(2), O.some(1)]))
+      assert.deepStrictEqual(
+	  actual1,
+	  O.some([O.some(3), O.some(2), O.some(1)]) as O.Option<_.ReadonlyNonEmptyArray<O.Option<number>>>
+      )
     // tslint:disable-next-line: deprecation
     const actual2 = _.filter(O.isSome)([O.some(3), O.none, O.some(1)])
-    assert.deepStrictEqual(actual2, O.some([O.some(3), O.some(1)]))
+    assert.deepStrictEqual(actual2, O.some([O.some(3), O.some(1)]) as O.Option<_.ReadonlyNonEmptyArray<O.Option<number>>>)
   })
 
   it('filterWithIndex', () => {
     // tslint:disable-next-line: deprecation
-    assert.deepStrictEqual(_.filterWithIndex((i) => i % 2 === 0)([1, 2, 3]), O.some([1, 3]))
+      assert.deepStrictEqual(
+	  _.filterWithIndex((i) => i % 2 === 0)([1, 2, 3]),
+	  O.some([1, 3]) as O.Option<_.ReadonlyNonEmptyArray<number>>)
     // tslint:disable-next-line: deprecation
     U.deepStrictEqual(_.filterWithIndex((i, a: number) => i % 2 === 1 && a > 2)([1, 2, 3]), O.none)
   })
@@ -394,7 +434,7 @@ describe('ReadonlyNonEmptyArray', () => {
     // tslint:disable-next-line: readonly-array
     const as = [1, 2, 3]
     const bs = _.fromArray(as)
-    assert.deepStrictEqual(bs, O.some(as))
+    assert.deepStrictEqual(bs, O.some(as) as O.Option<_.ReadonlyNonEmptyArray<number>>)
     assert.notStrictEqual((bs as any).value, as)
   })
 
