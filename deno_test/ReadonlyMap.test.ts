@@ -1,20 +1,29 @@
-import * as assert from 'assert'
-import { Either, left, right } from '../src/Either'
-import { Eq, fromEquals } from '../src/Eq'
-import { identity, pipe } from '../src/function'
-import * as IO from '../src/IO'
-import * as N from '../src/number'
-import * as O from '../src/Option'
-import * as Ord from '../src/Ord'
-import * as RA from '../src/ReadonlyArray'
-import * as _ from '../src/ReadonlyMap'
-import { Refinement } from '../src/Refinement'
-import * as Se from '../src/Semigroup'
-import { separated } from '../src/Separated'
-import { Show, struct } from '../src/Show'
-import * as S from '../src/string'
-import * as T from '../src/Task'
-import * as U from './util'
+import { Either, left, right } from '../deno_dist/Either.ts'
+import { Eq, fromEquals } from '../deno_dist/Eq.ts'
+import { identity, pipe } from '../deno_dist/function.ts'
+import * as IO from '../deno_dist/IO.ts'
+import * as N from '../deno_dist/number.ts'
+import * as O from '../deno_dist/Option.ts'
+import * as Ord from '../deno_dist/Ord.ts'
+import * as RA from '../deno_dist/ReadonlyArray.ts'
+import * as _ from '../deno_dist/ReadonlyMap.ts'
+import { Refinement } from '../deno_dist/Refinement.ts'
+import * as Se from '../deno_dist/Semigroup.ts'
+import { separated } from '../deno_dist/Separated.ts'
+import { Show, struct } from '../deno_dist/Show.ts'
+import * as S from '../deno_dist/string.ts'
+import * as T from '../deno_dist/Task.ts'
+import * as U from './util.ts'
+import {
+    describe,
+    it
+} from "https://deno.land/std@0.148.0/testing/bdd.ts"
+import { assertNotStrictEquals} from "https://deno.land/std@0.148.0/testing/asserts.ts";
+
+const assert = {
+    deepStrictEqual: U.deepStrictEqual,
+    notStrictEqual: assertNotStrictEquals
+}
 
 interface User {
   readonly id: string
@@ -550,12 +559,21 @@ describe('ReadonlyMap', () => {
     ])
     const b2 = new Map<User, number>([[{ id: 'b' }, 2]])
     const popS = _.pop(eqUser)
-    assert.deepStrictEqual(popS({ id: 'a' })(a1b2), O.some([1, b2]))
+    assert.deepStrictEqual(
+	popS({ id: 'a' })(a1b2),
+	O.some([1, b2]) as O.Option<[number, Map<User, number>]>
+    )
     U.deepStrictEqual(popS({ id: 'c' })(a1b2), O.none)
 
     const pop = _.pop(eqKey)
-    assert.deepStrictEqual(pop({ id: 1 })(repo), O.some([{ value: 1 }, new Map([[{ id: 2 }, { value: 2 }]])]))
-    assert.deepStrictEqual(pop({ id: 4 })(repo), O.some([{ value: 1 }, new Map([[{ id: 2 }, { value: 2 }]])]))
+    assert.deepStrictEqual(
+	pop({ id: 1 })(repo),
+	O.some([{ value: 1 }, new Map([[{ id: 2 }, { value: 2 }]])]) as O.Option<[Value, Map<Key, Value>]>
+    )
+    assert.deepStrictEqual(
+	pop({ id: 4 })(repo),
+	O.some([{ value: 1 }, new Map([[{ id: 2 }, { value: 2 }]])]) as O.Option<[Value, Map<Key, Value>]>
+    )
     U.deepStrictEqual(pop({ id: 3 })(repo), O.none)
     // should not modify the source
     U.deepStrictEqual(
@@ -570,17 +588,35 @@ describe('ReadonlyMap', () => {
   it('lookupWithKey', () => {
     const x = new Map<User, number>([[{ id: 'a' }, 1]])
     const lookupWithKeyS = _.lookupWithKey(eqUser)
-    assert.deepStrictEqual(lookupWithKeyS({ id: 'a' }, x), O.some([{ id: 'a' }, 1]))
+    assert.deepStrictEqual(
+	lookupWithKeyS({ id: 'a' }, x),
+	O.some([{ id: 'a' }, 1]) as O.Option<[User, number]>
+    )
     U.deepStrictEqual(lookupWithKeyS({ id: 'b' }, x), O.none)
-    assert.deepStrictEqual(lookupWithKeyS({ id: 'a' })(x), O.some([{ id: 'a' }, 1]))
+    assert.deepStrictEqual(
+	lookupWithKeyS({ id: 'a' })(x),
+	O.some([{ id: 'a' }, 1]) as O.Option<[User, number]>
+    )
     U.deepStrictEqual(lookupWithKeyS({ id: 'b' })(x), O.none)
 
     const lookupWithKey = _.lookupWithKey(eqKey)
-    assert.deepStrictEqual(lookupWithKey({ id: 1 }, repo), O.some([{ id: 1 }, { value: 1 }]))
-    assert.deepStrictEqual(lookupWithKey({ id: 4 }, repo), O.some([{ id: 1 }, { value: 1 }]))
+    assert.deepStrictEqual(
+	lookupWithKey({ id: 1 }, repo),
+	O.some([{ id: 1 }, { value: 1 }]) as O.Option<[Key, Value]>
+    )
+    assert.deepStrictEqual(
+	lookupWithKey({ id: 4 }, repo),
+	O.some([{ id: 1 }, { value: 1 }]) as O.Option<[Key, Value]>
+    )
     U.deepStrictEqual(lookupWithKey({ id: 3 }, repo), O.none)
-    assert.deepStrictEqual(lookupWithKey({ id: 1 })(repo), O.some([{ id: 1 }, { value: 1 }]))
-    assert.deepStrictEqual(lookupWithKey({ id: 4 })(repo), O.some([{ id: 1 }, { value: 1 }]))
+    assert.deepStrictEqual(
+	lookupWithKey({ id: 1 })(repo),
+	O.some([{ id: 1 }, { value: 1 }]) as O.Option<[Key, Value]>
+    )
+    assert.deepStrictEqual(
+	lookupWithKey({ id: 4 })(repo),
+	O.some([{ id: 1 }, { value: 1 }]) as O.Option<[Key, Value]>
+    )
     U.deepStrictEqual(lookupWithKey({ id: 3 })(repo), O.none)
   })
 
@@ -626,7 +662,7 @@ describe('ReadonlyMap', () => {
   })
 
   it('empty', () => {
-    assert.deepStrictEqual(_.empty, new Map<string, number>())
+    assert.deepStrictEqual(_.empty, new Map<string, number>() as Map<never, never>)
     U.deepStrictEqual(_.isEmpty(_.empty), true)
   })
 
