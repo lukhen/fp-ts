@@ -1,17 +1,27 @@
-import * as assert from 'assert'
-import * as E from '../src/Either'
-import { identity, pipe } from '../src/function'
-import * as IO from '../src/IO'
-import * as N from '../src/number'
-import * as O from '../src/Option'
-import { reverse } from '../src/Ord'
-import * as RA from '../src/ReadonlyArray'
-import * as _ from '../src/ReadonlyRecord'
-import * as Se from '../src/Semigroup'
-import { separated } from '../src/Separated'
-import * as S from '../src/string'
-import * as T from '../src/Task'
-import * as U from './util'
+import * as E from '../deno_dist/Either.ts'
+import { identity, pipe } from '../deno_dist/function.ts'
+import * as IO from '../deno_dist/IO.ts'
+import * as N from '../deno_dist/number.ts'
+import * as O from '../deno_dist/Option.ts'
+import { reverse } from '../deno_dist/Ord.ts'
+import * as RA from '../deno_dist/ReadonlyArray.ts'
+import * as _ from '../deno_dist/ReadonlyRecord.ts'
+import * as Se from '../deno_dist/Semigroup.ts'
+import { separated } from '../deno_dist/Separated.ts'
+import * as S from '../deno_dist/string.ts'
+import * as T from '../deno_dist/Task.ts'
+import * as U from './util.ts'
+import {
+    describe,
+    it
+} from "https://deno.land/std@0.148.0/testing/bdd.ts"
+import { assertNotStrictEquals, fail} from "https://deno.land/std@0.148.0/testing/asserts.ts";
+
+const assert = {
+    deepStrictEqual: U.deepStrictEqual,
+    notStrictEqual: assertNotStrictEquals,
+    fail
+}
 
 const p = (n: number) => n > 2
 
@@ -448,7 +458,10 @@ describe('ReadonlyRecord', () => {
   })
 
   it('pop', () => {
-    assert.deepStrictEqual(_.pop('a')({ a: 1, b: 2 }), O.some([1, { b: 2 }]))
+  assert.deepStrictEqual(
+      _.pop('a')({ a: 1, b: 2 }),
+      O.some([1, { b: 2 }]) as O.Option<[number, {b: number}]>
+  )
     U.deepStrictEqual(_.pop('c')({ a: 1, b: 2 }), O.none)
   })
 
