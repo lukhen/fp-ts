@@ -1,11 +1,21 @@
-import * as U from './util'
-import { pipe, SK } from '../src/function'
-import * as I from '../src/IO'
-import * as RA from '../src/ReadonlyArray'
-import * as _ from '../src/Task'
-import * as assert from 'assert'
-import * as S from '../src/string'
-import * as RNEA from '../src/ReadonlyNonEmptyArray'
+import * as U from './util.ts'
+import { pipe, SK } from '../deno_dist/function.ts'
+import * as I from '../deno_dist/IO.ts'
+import * as RA from '../deno_dist/ReadonlyArray.ts'
+import * as _ from '../deno_dist/Task.ts'
+import * as S from '../deno_dist/string.ts'
+import * as RNEA from '../deno_dist/ReadonlyNonEmptyArray.ts'
+import {
+    describe,
+    it
+} from "https:/deno.land/std@0.148.0/testing/bdd.ts"
+import { assertNotStrictEquals} from "https://deno.land/std@0.148.0/testing/asserts.ts";
+import { isDeepStrictEqual } from "https://deno.land/std@0.149.0/node/internal/util/comparisons.ts"
+
+const assert = {
+    deepStrictEqual: U.deepStrictEqual,
+    notStrictEqual: assertNotStrictEquals
+}
 
 const delayReject = <A>(n: number, a: A): _.Task<A> => () =>
   new Promise<A>((_, reject) => {
@@ -29,7 +39,7 @@ const assertOp = <A, B, C>(f: (a: _.Task<A>, b: _.Task<B>) => _.Task<C>) => asyn
   )
   const c = await pipe(f(pipe(a, append), pipe(b, append)))()
   U.deepStrictEqual(c, expected)
-  assert.deepStrictEqual(log, expectedLog)
+  assert.deepStrictEqual(log, expectedLog as unknown[])
 }
 
 describe('Task', () => {
@@ -42,7 +52,7 @@ describe('Task', () => {
 
     const res = await pipeline()
 
-    expect(res.length).toBe(55000)
+    U.deepStrictEqual(res.length, 55000)
   })
 
   // -------------------------------------------------------------------------------------
