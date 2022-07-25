@@ -1,21 +1,32 @@
-import * as assert from 'assert'
-import * as A from '../src/Array'
-import * as E from '../src/Either'
-import { pipe, SK, tuple } from '../src/function'
-import * as I from '../src/IO'
-import * as IE from '../src/IOEither'
-import * as O from '../src/Option'
-import * as R from '../src/Reader'
-import * as RE from '../src/ReaderEither'
-import * as RTE from '../src/ReaderTaskEither'
-import * as RA from '../src/ReadonlyArray'
-import { ReadonlyNonEmptyArray } from '../src/ReadonlyNonEmptyArray'
-import { State } from '../src/State'
-import * as _ from '../src/StateReaderTaskEither'
-import * as S from '../src/string'
-import * as T from '../src/Task'
-import * as TE from '../src/TaskEither'
-import * as U from './util'
+import * as A from '../deno_dist/Array.ts'
+import * as E from '../deno_dist/Either.ts'
+import { pipe, SK, tuple } from '../deno_dist/function.ts'
+import * as I from '../deno_dist/IO.ts'
+import * as IE from '../deno_dist/IOEither.ts'
+import * as O from '../deno_dist/Option.ts'
+import * as R from '../deno_dist/Reader.ts'
+import * as RE from '../deno_dist/ReaderEither.ts'
+import * as RTE from '../deno_dist/ReaderTaskEither.ts'
+import * as RA from '../deno_dist/ReadonlyArray.ts'
+import { ReadonlyNonEmptyArray } from '../deno_dist/ReadonlyNonEmptyArray.ts'
+import { State } from '../deno_dist/State.ts'
+import * as _ from '../deno_dist/StateReaderTaskEither.ts'
+import * as S from '../deno_dist/string.ts'
+import * as T from '../deno_dist/Task.ts'
+import * as TE from '../deno_dist/TaskEither.ts'
+import * as U from './util.ts'
+import {
+    describe,
+    it
+} from "https:/deno.land/std@0.148.0/testing/bdd.ts"
+import { assertNotStrictEquals, fail} from "https://deno.land/std@0.148.0/testing/asserts.ts";
+
+const assert = {
+    deepStrictEqual: U.deepStrictEqual,
+    notStrictEqual: assertNotStrictEquals,
+    fail
+}
+
 
 const state: unknown = {}
 
@@ -165,7 +176,10 @@ describe('StateReaderTaskEither', () => {
   it('run', async () => {
     const ma = _.right('a')
     const e = await ma({})({})()
-    assert.deepStrictEqual(e, E.right(['a', {}]))
+    assert.deepStrictEqual(
+	e,
+	E.right(['a', {}]) as E.Either<never, ['a', unknown]>
+    )
   })
 
   it('applicativeReaderTaskEitherSeq', async () => {
@@ -217,7 +231,10 @@ describe('StateReaderTaskEither', () => {
 
   it('rightTask', async () => {
     const e = await _.rightTask(T.of(1))({})({})()
-    assert.deepStrictEqual(e, E.right([1, {}]))
+    assert.deepStrictEqual(
+	e,
+	E.right([1, {}]) as E.Either<never, [number, unknown]>
+    )
   })
 
   it('leftTask', async () => {
@@ -227,12 +244,18 @@ describe('StateReaderTaskEither', () => {
 
   it('fromTaskEither', async () => {
     const e = await _.fromTaskEither(TE.of(1))({})({})()
-    assert.deepStrictEqual(e, E.right([1, {}]))
+    assert.deepStrictEqual(
+	e,
+	E.right([1, {}]) as E.Either<never, [number, never]>
+    )
   })
 
   it('rightReader', async () => {
     const e = await _.rightReader(R.of(1))({})({})()
-    assert.deepStrictEqual(e, E.right([1, {}]))
+    assert.deepStrictEqual(
+	e,
+	E.right([1, {}]) as E.Either<never, [number, never]>
+    )
   })
 
   it('leftReader', async () => {
@@ -242,28 +265,37 @@ describe('StateReaderTaskEither', () => {
 
   it('fromIOEither', async () => {
     const e1 = await _.fromIOEither(IE.right(1))({})({})()
-    assert.deepStrictEqual(e1, E.right([1, {}]))
+    assert.deepStrictEqual(
+	e1,
+	E.right([1, {}]) as E.Either<never, [number, never]>
+    )
     const e2 = await _.fromIOEither(IE.left(1))({})({})()
     U.deepStrictEqual(e2, E.left(1))
   })
 
   it('fromEither', async () => {
     const e1 = await _.fromEither(E.right(1))({})({})()
-    assert.deepStrictEqual(e1, E.right([1, {}]))
+    assert.deepStrictEqual(
+	e1,
+	E.right([1, {}]) as E.Either<never, [number, never]>
+    )
     const e2 = await _.fromEither(E.left(1))({})({})()
     U.deepStrictEqual(e2, E.left(1))
   })
 
   it('fromOption', async () => {
     const e1 = await _.fromOption(() => 'err')(O.some(1))({})({})()
-    assert.deepStrictEqual(e1, E.right([1, {}]))
+    assert.deepStrictEqual(e1, E.right([1, {}]) as E.Either<never, [number, never]>)
     const e2 = await _.fromOption(() => 'err')(O.none)({})({})()
     U.deepStrictEqual(e2, E.left('err'))
   })
 
   it('rightIO', async () => {
     const e = await _.rightIO(I.of(1))({})({})()
-    assert.deepStrictEqual(e, E.right([1, {}]))
+    assert.deepStrictEqual(
+	e,
+	E.right([1, {}]) as E.Either<never, [number, never]>
+    )
   })
 
   it('leftIO', async () => {
@@ -275,50 +307,56 @@ describe('StateReaderTaskEither', () => {
     const e1 = await _.fromOption(() => 'none')(O.none)({})({})()
     U.deepStrictEqual(e1, E.left('none'))
     const e2 = await _.fromOption(() => 'none')(O.some(1))({})({})()
-    assert.deepStrictEqual(e2, E.right([1, {}]))
+    assert.deepStrictEqual(
+	e2,
+	E.right([1, {}]) as E.Either<never, [number, never]>
+    )
   })
 
   it('fromReaderEither', async () => {
     const e1 = await _.fromReaderEither(RE.left('a'))({})({})()
     U.deepStrictEqual(e1, E.left('a'))
     const e2 = await _.fromReaderEither(RE.right(1))({})({})()
-    assert.deepStrictEqual(e2, E.right([1, {}]))
+    assert.deepStrictEqual(e2, E.right([1, {}])  as E.Either<never, [number, never]>)
   })
 
   it('chainEitherK', async () => {
     const f = (s: string) => E.right(s.length)
     const x = await pipe(_.right('a'), _.chainEitherK(f))(undefined)(undefined)()
-    assert.deepStrictEqual(x, E.right([1, undefined]))
+    assert.deepStrictEqual(x, E.right([1, undefined])  as E.Either<never, [number, never]>)
   })
 
   it('chainIOEitherK', async () => {
     const f = (s: string) => IE.right(s.length)
     const x = await pipe(_.right('a'), _.chainIOEitherK(f))(undefined)(undefined)()
-    assert.deepStrictEqual(x, E.right([1, undefined]))
+    assert.deepStrictEqual(x, E.right([1, undefined])  as E.Either<never, [number, never]>)
   })
 
   it('chainTaskEitherK', async () => {
     const f = (s: string) => TE.right(s.length)
     const x = await pipe(_.right('a'), _.chainTaskEitherK(f))(undefined)(undefined)()
-    assert.deepStrictEqual(x, E.right([1, undefined]))
+    assert.deepStrictEqual(x, E.right([1, undefined])  as E.Either<never, [number, never]>)
   })
 
   it('chainReaderTaskEitherK', async () => {
     const f = (s: string) => RTE.right(s.length)
     const x = await pipe(_.right('a'), _.chainReaderTaskEitherK(f))(undefined)(undefined)()
-    assert.deepStrictEqual(x, E.right([1, undefined]))
+    assert.deepStrictEqual(x, E.right([1, undefined])  as E.Either<never, [number, never]>)
   })
 
   it('put', async () => {
-    assert.deepStrictEqual(await _.put(2)(1)({})(), E.right([undefined, 2]))
+    assert.deepStrictEqual(await _.put(2)(1)({})(), E.right([undefined, 2])  as E.Either<never, [undefined, never]>)
   })
 
   it('get', async () => {
-    assert.deepStrictEqual(await _.get()(1)({})(), E.right([1, 1]))
+    assert.deepStrictEqual(await _.get()(1)({})(), E.right([1, 1])  as E.Either<never, [number, number]>)
   })
 
   it('modify', async () => {
-    assert.deepStrictEqual(await _.modify(U.double)(1)({})(), E.right([undefined, 2]))
+    assert.deepStrictEqual(
+	await _.modify(U.double)(1)({})(),
+	E.right([undefined, 2])  as E.Either<never, [undefined, never]>
+    )
   })
 
   it('gets', async () => {
@@ -332,7 +370,7 @@ describe('StateReaderTaskEither', () => {
         _.bindTo('a'),
         _.bind('b', () => _.right('b'))
       )(undefined)(undefined)(),
-      E.right([{ a: 1, b: 'b' }, undefined])
+	E.right([{ a: 1, b: 'b' }, undefined]) as E.Either<never, [{a: number, b: string}, never]>
     )
   })
 
@@ -341,7 +379,7 @@ describe('StateReaderTaskEither', () => {
       await pipe(_.right<void, void, string, number>(1), _.bindTo('a'), _.apS('b', _.right('b')))(undefined)(
         undefined
       )(),
-      E.right([{ a: 1, b: 'b' }, undefined])
+      E.right([{ a: 1, b: 'b' }, undefined]) as E.Either<never, [{a: number, b: string}, never]>
     )
   })
 
@@ -409,7 +447,7 @@ describe('StateReaderTaskEither', () => {
       assert.deepStrictEqual(
         // tslint:disable-next-line: deprecation
         await pipe([right(1), right(2)], _.sequenceArray)(undefined)(undefined)(),
-        E.right([[1, 2], undefined])
+        E.right([[1, 2], undefined] ) as E.Either<never, [number[], never]>
       )
       // tslint:disable-next-line: deprecation
       U.deepStrictEqual(await pipe([right(3), left('a')], _.sequenceArray)(undefined)(undefined)(), E.left('a'))
