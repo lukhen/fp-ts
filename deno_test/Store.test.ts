@@ -1,8 +1,12 @@
-import { pipe } from '../src/function'
-import * as RA from '../src/ReadonlyArray'
-import * as _ from '../src/Store'
-import * as S from '../src/string'
-import * as U from './util'
+import { pipe } from '../deno_dist/function.ts'
+import * as RA from '../deno_dist/ReadonlyArray.ts'
+import * as _ from '../deno_dist/Store.ts'
+import * as S from '../deno_dist/string.ts'
+import * as U from './util.ts'
+import {
+    describe,
+    it
+} from "https:/deno.land/std@0.148.0/testing/bdd.ts"
 
 describe('Store', () => {
   describe('pipeables', () => {

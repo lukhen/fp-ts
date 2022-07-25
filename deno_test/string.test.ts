@@ -1,6 +1,10 @@
-import * as U from './util'
-import * as _ from '../src/string'
-import { pipe } from '../src/function'
+import * as U from './util.ts'
+import * as _ from '../deno_dist/string.ts'
+import { pipe } from '../deno_dist/function.ts'
+import {
+    describe,
+    it
+} from "https:/deno.land/std@0.148.0/testing/bdd.ts"
 
 describe('string', () => {
   // -------------------------------------------------------------------------------------

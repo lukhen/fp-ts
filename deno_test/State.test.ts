@@ -1,8 +1,12 @@
-import { pipe, tuple } from '../src/function'
-import * as RA from '../src/ReadonlyArray'
-import { ReadonlyNonEmptyArray } from '../src/ReadonlyNonEmptyArray'
-import * as _ from '../src/State'
-import * as U from './util'
+import { pipe, tuple } from '../deno_dist/function.ts'
+import * as RA from '../deno_dist/ReadonlyArray.ts'
+import { ReadonlyNonEmptyArray } from '../deno_dist/ReadonlyNonEmptyArray.ts'
+import * as _ from '../deno_dist/State.ts'
+import * as U from './util.ts'
+import {
+    describe,
+    it
+} from "https:/deno.land/std@0.148.0/testing/bdd.ts"
 
 describe('State', () => {
   describe('pipeables', () => {

@@ -1,11 +1,15 @@
-import { pipe, SK } from '../src/function'
-import * as O from '../src/Option'
-import * as RA from '../src/ReadonlyArray'
-import { ReadonlyNonEmptyArray } from '../src/ReadonlyNonEmptyArray'
-import * as T from '../src/Task'
-import * as TE from '../src/TaskEither'
-import * as _ from '../src/TaskOption'
-import * as U from './util'
+import { pipe, SK } from '../deno_dist/function.ts'
+import * as O from '../deno_dist/Option.ts'
+import * as RA from '../deno_dist/ReadonlyArray.ts'
+import { ReadonlyNonEmptyArray } from '../deno_dist/ReadonlyNonEmptyArray.ts'
+import * as T from '../deno_dist/Task.ts'
+import * as TE from '../deno_dist/TaskEither.ts'
+import * as _ from '../deno_dist/TaskOption.ts'
+import * as U from './util.ts'
+import {
+    describe,
+    it
+} from "https:/deno.land/std@0.148.0/testing/bdd.ts"
 
 describe('TaskOption', () => {
   // -------------------------------------------------------------------------------------

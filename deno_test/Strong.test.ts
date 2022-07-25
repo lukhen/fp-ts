@@ -1,6 +1,10 @@
-import * as U from './util'
-import * as R from '../src/Reader'
-import { fanout, splitStrong } from '../src/Strong'
+import * as U from './util.ts'
+import * as R from '../deno_dist/Reader.ts'
+import { fanout, splitStrong } from '../deno_dist/Strong.ts'
+import {
+    describe,
+    it
+} from "https:/deno.land/std@0.148.0/testing/bdd.ts"
 
 describe('Strong', () => {
   it('splitStrong', () => {
