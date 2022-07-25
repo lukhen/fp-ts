@@ -1,7 +1,11 @@
-import * as U from './util'
-import * as RA from '../src/ReadonlyArray'
-import * as O from '../src/Option'
-import { getTraversableComposition } from '../src/Traversable'
+import * as U from './util.ts'
+import * as RA from '../deno_dist/ReadonlyArray.ts'
+import * as O from '../deno_dist/Option.ts'
+import { getTraversableComposition } from '../deno_dist/Traversable.ts'
+import {
+    describe,
+    it
+} from "https:/deno.land/std@0.148.0/testing/bdd.ts"
 
 export const ArrayOptionURI = 'ArrayOption'
 

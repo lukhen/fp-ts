@@ -1,7 +1,11 @@
-import * as U from './util'
-import { pipe, tuple } from '../src/function'
-import * as S from '../src/string'
-import * as _ from '../src/Writer'
+import * as U from './util.ts'
+import { pipe, tuple } from '../deno_dist/function.ts'
+import * as S from '../deno_dist/string.ts'
+import * as _ from '../deno_dist/Writer.ts'
+import {
+    describe,
+    it
+} from "https:/deno.land/std@0.148.0/testing/bdd.ts"
 
 describe('Writer', () => {
   describe('pipeables', () => {

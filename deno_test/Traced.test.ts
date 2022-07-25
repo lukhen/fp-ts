@@ -1,8 +1,12 @@
-import * as U from './util'
-import * as B from '../src/boolean'
-import { pipe } from '../src/function'
-import { struct, Monoid } from '../src/Monoid'
-import * as _ from '../src/Traced'
+import * as U from './util.ts'
+import * as B from '../deno_dist/boolean.ts'
+import { pipe } from '../deno_dist/function.ts'
+import { struct, Monoid } from '../deno_dist/Monoid.ts'
+import * as _ from '../deno_dist/Traced.ts'
+import {
+    describe,
+    it
+} from "https:/deno.land/std@0.148.0/testing/bdd.ts"
 
 // Adapted from https://chshersh.github.io/posts/2019-03-25-comonadic-builders
 

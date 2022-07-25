@@ -1,11 +1,15 @@
-import { pipe } from '../src/function'
-import * as RT from '../src/ReaderTask'
-import * as RA from '../src/ReadonlyArray'
-import * as RR from '../src/ReadonlyRecord'
-import * as T from '../src/Task'
-import * as S from '../src/string'
-import * as _ from '../src/Witherable'
-import * as U from './util'
+import { pipe } from '../deno_dist/function.ts'
+import * as RT from '../deno_dist/ReaderTask.ts'
+import * as RA from '../deno_dist/ReadonlyArray.ts'
+import * as RR from '../deno_dist/ReadonlyRecord.ts'
+import * as T from '../deno_dist/Task.ts'
+import * as S from '../deno_dist/string.ts'
+import * as _ from '../deno_dist/Witherable.ts'
+import * as U from './util.ts'
+import {
+    describe,
+    it
+} from "https:/deno.land/std@0.148.0/testing/bdd.ts"
 
 describe('Witherable', () => {
   describe('filterE', () => {

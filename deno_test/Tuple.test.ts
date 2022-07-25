@@ -1,11 +1,22 @@
-import * as U from './util'
-import { getMonoid } from '../src/Array'
-import { left, right } from '../src/Either'
-import { identity, pipe } from '../src/function'
-import * as S from '../src/string'
-import * as O from '../src/Option'
-import * as _ from '../src/Tuple'
-import * as assert from 'assert'
+import * as U from './util.ts'
+import { getMonoid } from '../deno_dist/Array.ts'
+import { left, right } from '../deno_dist/Either.ts'
+import { identity, pipe } from '../deno_dist/function.ts'
+import * as S from '../deno_dist/string.ts'
+import * as O from '../deno_dist/Option.ts'
+import * as _ from '../deno_dist/Tuple.ts'
+import { assertNotStrictEquals} from "https://deno.land/std@0.148.0/testing/asserts.ts";
+import {
+    describe,
+    it
+} from "https:/deno.land/std@0.148.0/testing/bdd.ts"
+
+
+const assert = {
+    deepStrictEqual: U.deepStrictEqual,
+    notStrictEqual: assertNotStrictEquals
+}
+
 
 describe('Tuple', () => {
   describe('pipeables', () => {

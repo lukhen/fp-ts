@@ -1,13 +1,17 @@
-import * as E from '../src/Either'
-import { pipe, SK } from '../src/function'
-import * as IO from '../src/IO'
-import * as N from '../src/number'
-import * as RA from '../src/ReadonlyArray'
-import * as S from '../src/string'
-import * as T from '../src/Task'
-import * as _ from '../src/TaskThese'
-import * as TH from '../src/These'
-import * as U from './util'
+import * as E from '../deno_dist/Either.ts'
+import { pipe, SK } from '../deno_dist/function.ts'
+import * as IO from '../deno_dist/IO.ts'
+import * as N from '../deno_dist/number.ts'
+import * as RA from '../deno_dist/ReadonlyArray.ts'
+import * as S from '../deno_dist/string.ts'
+import * as T from '../deno_dist/Task.ts'
+import * as _ from '../deno_dist/TaskThese.ts'
+import * as TH from '../deno_dist/These.ts'
+import * as U from './util.ts'
+import {
+    describe,
+    it
+} from "https:/deno.land/std@0.148.0/testing/bdd.ts"
 
 describe('TaskThese', () => {
   // -------------------------------------------------------------------------------------

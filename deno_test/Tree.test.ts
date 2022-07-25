@@ -1,11 +1,15 @@
-import * as U from './util'
-import * as Eq from '../src/Eq'
-import { identity, pipe } from '../src/function'
-import * as T from '../src/Task'
-import * as O from '../src/Option'
-import * as S from '../src/string'
-import * as _ from '../src/Tree'
-import * as N from '../src/number'
+import * as U from './util.ts'
+import * as Eq from '../deno_dist/Eq.ts'
+import { identity, pipe } from '../deno_dist/function.ts'
+import * as T from '../deno_dist/Task.ts'
+import * as O from '../deno_dist/Option.ts'
+import * as S from '../deno_dist/string.ts'
+import * as _ from '../deno_dist/Tree.ts'
+import * as N from '../deno_dist/number.ts'
+import {
+    describe,
+    it
+} from "https:/deno.land/std@0.148.0/testing/bdd.ts"
 
 describe('Tree', () => {
   describe('pipeables', () => {
